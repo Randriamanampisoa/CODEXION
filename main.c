@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/16 04:33:51 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/18 11:39:41 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char *argv[])
 	}
 	printf("Number of coders %d\n", config.number_of_coders);
 	printf("Time to burnout %d\n", config.time_to_burnout);
-	printf("Time_to_compile %d\n", config.time_to_compile);
+	printf("Time to compile %d\n", config.time_to_compile);
 	printf("Time to debug: %d\n", config.time_to_debug);
 	printf("Time to refactor: %d\n", config.time_to_refactor);
 	printf(
