@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/19 17:47:46 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/21 15:07:06 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,41 @@ void	*routine(void *arg)
 
 	config = (t_data *)arg;
 	i = 0;
-	while (i < config->number_of_coder)
+	while (i < config->number_of_compiles_required)
 	{
-		usleep(100000);
-		printf("Time to burnout %d\n", config->time_to_burnout);
-		printf("Time to compile %d\n", config->time_to_compile);
-		printf("Time to debug: %d\n", config->time_to_debug);
-		printf("Time to refactor: %d\n", config->time_to_refactor);
-		printf(
-			"Number of compiles_required: %d\n",
-			config->number_of_compiles_required
-			);
-		printf("Dongle_cooldown: %d\n", config->dongle_cooldown);
-		printf("Scheduler: %s\n", config->scheduler);
+		printf("Compile\n");
+		usleep(config->time_to_compile * 1000);
 		i++;
 	}
+	return (NULL);
+}
+
+void	*create_threads(t_data config)
+{
+	pthread_t *thread;
+
+	int	i;
+	i = 0;
+	thread = malloc(sizeof(pthread_t) * config.number_of_coder);
+	while (config.number_of_coder > i)
+	{
+		if (pthread_create(&thread[i], NULL, routine, (void *)&config) != 0)
+			return (NULL);
+		i++;
+	}
+	i = 0;
+	while (config.number_of_coder > i)
+	{
+		pthread_join(thread[i], NULL);
+		i++;
+	}
+	
 	return (NULL);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_data		config;
-	pthread_t	thread1;
-	pthread_t	thread2;
 	t_coder		*tab;
 	int			i;
 
@@ -60,10 +72,7 @@ int	main(int argc, char *argv[])
 		tab[i].id = i + 1;
 		i++;
 	}
-	pthread_create(&thread1, NULL, routine, (void *)&config);
-	pthread_create(&thread2, NULL, routine, (void *)&config);
-	pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
+	create_threads(config);
 	free(tab);
 	return (0);
 }
