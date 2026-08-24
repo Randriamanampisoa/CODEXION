@@ -53,6 +53,6 @@ int		pars(t_data *config, int agrc, char *argv[]);
 int		main(int argc, char *argv[]);
 void	*create_threads(t_data config, t_coder *coders);
 void	*routine(void *arg);
-int     init_coder_dongle();
+int     init_coder_dongle(t_data config, t_coders *coders, t_dongle *dongle
 
 #endif
