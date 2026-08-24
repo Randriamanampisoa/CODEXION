@@ -1,6 +1,7 @@
 #include "codexion.h"
 
 int init_coder_dongle()
+{
    t_dongle     *dongles;
    t_data		config;
    t_coder		*coders;
@@ -8,7 +9,7 @@ int init_coder_dongle()
 
    dongles = malloc(sizeof(t_dongle) * config.number_of_coder);
 	if (!dongles)
-		return (1);
+		return (0);
 	i = 0;
 	while (i < config.number_of_coder)
 	{
@@ -22,7 +23,7 @@ int init_coder_dongle()
 	if (!coders)
 	{
 		free(dongles);
-		return (1);
+		return (0);
 	}
 	i = 0;
 	while (i < config.number_of_coder)
@@ -33,3 +34,5 @@ int init_coder_dongle()
 		coders[i].right = &dongles[(i + 1) % config.number_of_coder];
 		i++;
 	}
+	return (1);
+}
