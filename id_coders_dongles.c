@@ -1,8 +1,10 @@
 #include "codexion.h"
 
 int init_coder_dongle()
-   t_dongle	*dongles;
-   int      i;
+   t_dongle     *dongles;
+   t_data		config;
+   t_coder		*coders;
+   int          i;
 
    dongles = malloc(sizeof(t_dongle) * config.number_of_coder);
 	if (!dongles)
