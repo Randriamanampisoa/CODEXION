@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:05:03 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/26 10:52:09 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/26 15:06:29 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_dongle
 	long			released_at;
 }	t_dongle;
 
-
 typedef struct s_coder
 {
 	int			id;
@@ -54,5 +53,10 @@ int		main(int argc, char *argv[]);
 void	*create_threads(t_data config, t_coder *coders);
 void	*routine(void *arg);
 int		init_coder_dongle(t_data *config, t_coder **coders, t_dongle **dongles);
+void	coders_take_d(t_coder *coder);
+void    compiles(t_coder *coder);
+void    debuges(t_coder *coder);
+void    refactores(t_coder *coder);
+
 
 #endif

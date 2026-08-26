@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/08/18 15:34:50 by fanilran          #+#    #+#              #
-#    Updated: 2026/08/26 10:46:22 by fanilran         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -lpthread
-SRC = main.c parsing.c init_coders_dongles.c
+SRC = main.c parsing.c init.c dongles.c action.c
 OBJ = $(SRC:.c=.o)
 NAME = ./codexion
 
