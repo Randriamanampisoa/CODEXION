@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:05:03 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/24 14:59:59 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/26 10:52:09 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int		pars(t_data *config, int agrc, char *argv[]);
 int		main(int argc, char *argv[]);
 void	*create_threads(t_data config, t_coder *coders);
 void	*routine(void *arg);
-int     init_coder_dongle(t_data config, t_coders *coders, t_dongle *dongle
+int		init_coder_dongle(t_data *config, t_coder **coders, t_dongle **dongles);
 
 #endif

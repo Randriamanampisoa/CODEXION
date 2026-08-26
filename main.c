@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/24 16:33:53 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/26 10:57:02 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	*create_threads(t_data config, t_coder *coders)
 	i = 0;
 	while (config.number_of_coder > i)
 	{
-		if (pthread_create(&thread[i], NULL, routine, &coders[i]) != 0)
-			return (NULL);
+		pthread_create(&thread[i], NULL, routine, &coders[i]);
 		i++;
 	}
 	i = 0;
@@ -65,7 +64,7 @@ int	main(int argc, char *argv[])
 		printf("Error: Regarding the argument!");
 		return (1);
 	}
-	if (!init_coder_dongle(config, coders, dongles))
+	if (!init_coder_dongle(&config, &coders, &dongles))
 		return (1);
 	create_threads(config, coders);
 	i = 0;
