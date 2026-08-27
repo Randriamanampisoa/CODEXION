@@ -6,13 +6,13 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/14 13:32:17 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/26 14:26:06 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/27 10:32:53 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-int	is_positive(char *str)
+static int	is_positive(char *str)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	is_positive(char *str)
 	return (1);
 }
 
-int	verify_s(char *str)
+static int	verify_s(char *str)
 {
 	if (strcmp(str, "fifo") == 0 || strcmp(str, "edf") == 0)
 		return (1);

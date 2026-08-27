@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/26 16:09:31 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/08/27 12:29:04 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,21 @@ void	*routine(void *arg)
 	i = 0;
 	while (i < coder->config->number_of_compiles_required)
 	{
-		coders_take_d(coder);
+		if (coder->id % 2 == 0)
+		{
+			take_dongle(coder, coder->left);
+			take_dongle(coder, coder->right);
+		}
+		else
+		{
+			take_dongle(coder, coder->right);
+			take_dongle(coder, coder->left);
+		}
+		compiles(coder);
+		release_dongle(coder->left);
+		release_dongle(coder->right);
+		debuges(coder);
+		refactores(coder);
 		i++;
 	}
 	return (NULL);
