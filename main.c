@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/27 12:29:04 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/04 13:46:04 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	*routine(void *arg)
 			take_dongle(coder, coder->right);
 			take_dongle(coder, coder->left);
 		}
+		pthread_mutex_lock(&coder->activity_mutex);
+		coder->last_compile_start = get_timestamp_ms(coder->config->start_time);
+		pthread_mutex_unlock(&coder->activity_mutex);
 		compiles(coder);
 		release_dongle(coder->left);
 		release_dongle(coder->right);
@@ -76,11 +79,13 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (!init_coder_dongle(&config, &coders, &dongles))
 		return (1);
+	config.start_time = get_timestamp_ms(0);
 	create_threads(config, coders);
 	i = 0;
 	while (i < config.number_of_coder)
 	{
 		pthread_mutex_destroy(&dongles[i].lock);
+		pthread_mutex_destroy(&coders[i].activity_mutex); 
 		pthread_cond_destroy(&dongles[i].cond);
 		i++;
 	}

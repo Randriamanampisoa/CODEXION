@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 11:14:29 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/26 11:14:29 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/04 13:36:30 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	init_coders(t_data *config, t_coder **coders, t_dongle **dongles)
 	i = 0;
 	while (i < config->number_of_coder)
 	{
+		pthread_mutex_init(&(*coders)[i].activity_mutex, NULL);
+		(*coders)[i].last_compile_start = 0;
 		(*coders)[i].id = i + 1;
 		(*coders)[i].config = config;
 		(*coders)[i].left = &(*dongles)[i];

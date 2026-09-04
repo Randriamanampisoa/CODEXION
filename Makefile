@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -lpthread
-SRC = main.c parsing.c init.c dongles.c action.c
+SRC = main.c parsing.c init.c dongles.c action.c time.c
 OBJ = $(SRC:.c=.o)
 NAME = ./codexion
 

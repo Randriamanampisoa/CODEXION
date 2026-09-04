@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:05:03 by fanilran          #+#    #+#             */
-/*   Updated: 2026/08/27 12:17:24 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/04 13:30:04 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int				number_of_compiles_required;
 	int				dongle_cooldown;
 	char			*scheduler;
+	long            start_time;
 	pthread_mutex_t	print_mutex;
 }	t_data;
 
@@ -41,11 +42,13 @@ typedef struct s_dongle
 
 typedef struct s_coder
 {
-	int			id;
-	pthread_t	thread;
-	t_dongle	*left;
-	t_dongle	*right;
-	t_data		*config;
+	int				id;
+	pthread_t		thread;
+	t_dongle		*left;
+	t_dongle		*right;
+	t_data			*config;
+	long			last_compile_start;
+	pthread_mutex_t	activity_mutex;
 }	t_coder;
 
 int		pars(t_data *config, int agrc, char *argv[]);
@@ -57,5 +60,6 @@ void	take_dongle(t_coder *coder, t_dongle *dongle);
 void	compiles(t_coder *coder);
 void	debuges(t_coder *coder);
 void	refactores(t_coder *coder);
+long get_timestamp_ms(long start_time);
 
 #endif
