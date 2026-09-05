@@ -6,11 +6,27 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/04 13:46:04 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/05 14:22:28 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+int	take_dongle(t_coder *coder)
+{
+	if (coder->id % 2 == 0)
+	{
+		take_one(coder, coder->left);
+		take_one(coder, coder->right);
+	}
+	else
+	{
+		take_one(coder, coder->right);
+		take_one(coder, coder->left);
+	}
+	return (1);
+}
+
 
 void	*routine(void *arg)
 {
@@ -21,19 +37,10 @@ void	*routine(void *arg)
 	i = 0;
 	while (i < coder->config->number_of_compiles_required)
 	{
-		if (coder->id % 2 == 0)
-		{
-			take_dongle(coder, coder->left);
-			take_dongle(coder, coder->right);
-		}
-		else
-		{
-			take_dongle(coder, coder->right);
-			take_dongle(coder, coder->left);
-		}
-		pthread_mutex_lock(&coder->activity_mutex);
-		coder->last_compile_start = get_timestamp_ms(coder->config->start_time);
-		pthread_mutex_unlock(&coder->activity_mutex);
+		take_dongle(coder);
+		// pthread_mutex_lock(&coder->activity_mutex);
+		// coder->last_compile_start = get_timestamp_ms(coder->config->start_time);
+		// pthread_mutex_unlock(&coder->activity_mutex);
 		compiles(coder);
 		release_dongle(coder->left);
 		release_dongle(coder->right);
