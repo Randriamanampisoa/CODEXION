@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 15:01:17 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/04 14:03:34 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 12:00:54 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	compiles(t_coder *coder)
 
 	pthread_mutex_lock(&coder->config->print_mutex);
 	timestamp = get_timestamp_ms(coder->config->start_time);
-	printf("%ld %d is compiling\n",timestamp, coder->id);
+	printf("%ld %d is compiling\n", timestamp, coder->id);
 	pthread_mutex_unlock(&coder->config->print_mutex);
 	usleep(coder->config->time_to_compile * 1000);
 }
@@ -40,7 +40,7 @@ void	refactores(t_coder *coder)
 
 	pthread_mutex_lock(&coder->config->print_mutex);
 	timestamp = get_timestamp_ms(coder->config->start_time);
-	printf("%ld %d is refactoring\n",timestamp, coder->id);
+	printf("%ld %d is refactoring\n", timestamp, coder->id);
 	pthread_mutex_unlock(&coder->config->print_mutex);
 	usleep(coder->config->time_to_refactor * 1000);
 }

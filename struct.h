@@ -1,9 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/07 11:59:04 by fanilran          #+#    #+#             */
+/*   Updated: 2026/09/07 12:04:51 by fanilran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCT_H
-#define STRUCT_H
-
-#include "codexion.h"
+# define STRUCT_H
+# include "codexion.h"
 
 typedef struct s_data
 {
@@ -15,7 +24,7 @@ typedef struct s_data
 	int				number_of_compiles_required;
 	int				dongle_cooldown;
 	char			*scheduler;
-	long            start_time;
+	long			start_time;
 	pthread_mutex_t	print_mutex;
 }	t_data;
 
@@ -37,6 +46,5 @@ typedef struct s_coder
 	long			last_compile_start;
 	pthread_mutex_t	activity_mutex;
 }	t_coder;
-
 
 #endif

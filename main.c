@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/05 14:22:28 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 12:46:12 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	take_dongle(t_coder *coder)
 	return (1);
 }
 
-
 void	*routine(void *arg)
 {
 	t_coder	*coder;
@@ -38,12 +37,12 @@ void	*routine(void *arg)
 	while (i < coder->config->number_of_compiles_required)
 	{
 		take_dongle(coder);
-		// pthread_mutex_lock(&coder->activity_mutex);
-		// coder->last_compile_start = get_timestamp_ms(coder->config->start_time);
-		// pthread_mutex_unlock(&coder->activity_mutex);
+		pthread_mutex_lock(&coder->activity_mutex);
+		coder->last_compile_start = get_timestamp_ms(coder->config->start_time);
+		pthread_mutex_unlock(&coder->activity_mutex);
 		compiles(coder);
-		release_dongle(coder->left);
-		release_dongle(coder->right);
+		release_dongle(coder, coder->left);
+		release_dongle(coder, coder->right);
 		debuges(coder);
 		refactores(coder);
 		i++;
@@ -92,7 +91,7 @@ int	main(int argc, char *argv[])
 	while (i < config.number_of_coder)
 	{
 		pthread_mutex_destroy(&dongles[i].lock);
-		pthread_mutex_destroy(&coders[i].activity_mutex); 
+		pthread_mutex_destroy(&coders[i].activity_mutex);
 		pthread_cond_destroy(&dongles[i].cond);
 		i++;
 	}

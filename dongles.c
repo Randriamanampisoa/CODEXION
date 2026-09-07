@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 11:14:21 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/05 14:06:33 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 12:45:37 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ void	take_one(t_coder *coder, t_dongle *dongle)
 	pthread_mutex_unlock(&dongle->lock);
 	timestamp = get_timestamp_ms(coder->config->start_time);
 	pthread_mutex_lock(&coder->config->print_mutex);
-	printf("%ld %d has taken a dongle\n",timestamp, coder->id);
+	printf("%ld %d has taken a dongle\n", timestamp, coder->id);
 	pthread_mutex_unlock(&coder->config->print_mutex);
 }
 
-void	release_dongle(t_dongle *dongle)
+void	release_dongle(t_coder *coder, t_dongle *dongle)
 {
+	pthread_mutex_lock(&dongle->lock);
+	dongle->released_t = get_timestamp_ms(coder->config->start_time);
+	pthread_mutex_unlock(&dongle->lock);
+	usleep(coder->config->dongle_cooldown * 1000);
 	pthread_mutex_lock(&dongle->lock);
 	dongle->available = 1;
 	pthread_cond_broadcast(&dongle->cond);
