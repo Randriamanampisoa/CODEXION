@@ -1,5 +1,6 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -lpthread
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -lpthread
 SRC =	main.c \
 		parsing.c \
 		init.c \
@@ -18,7 +19,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "  $(GREEN)Executable file:$(RESET) %s\n" $@
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 %.o: %.c
 	@printf "  $(BLUE)CC$(RESET) %s\n" $<
