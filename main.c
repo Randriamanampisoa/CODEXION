@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/07 12:46:12 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 12:59:39 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	*routine(void *arg)
 	}
 	return (NULL);
 }
+
+
+
+/*
+	0 + 300
+*/
 
 void	*create_threads(t_data config, t_coder *coders)
 {

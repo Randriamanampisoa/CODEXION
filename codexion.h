@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 21:05:03 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/07 12:31:38 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 13:22:19 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <string.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <pthread.h>
 # include <sys/time.h>
 # include "struct.h"
 
