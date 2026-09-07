@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 11:14:21 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/07 13:21:23 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 13:28:42 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	take_one(t_coder *coder, t_dongle *dongle)
 void	release_dongle(t_coder *coder, t_dongle *dongle)
 {
 	pthread_mutex_lock(&dongle->lock);
-	dongle->released_t = get_timestamp_ms(coder->config->start_time);
-	// printf("\n%ld\n", dongle->released_t);
+	dongle->released_at = get_timestamp_ms(coder->config->start_time);
+	// printf("\n%ld\n", dongle->released_at);
 	pthread_mutex_unlock(&dongle->lock);
 	usleep(coder->config->dongle_cooldown * 1000);
 	pthread_mutex_lock(&dongle->lock);

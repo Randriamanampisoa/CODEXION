@@ -6,16 +6,26 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 12:05:06 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/07 12:07:52 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/07 15:19:05 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-long	get_timestamp_ms(long start_time)
+long	get_current_ms()
 {
 	struct timeval	tv;
-
 	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000) - start_time);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
+
+long	get_timestamp_ms(long start_time)
+{
+	return (get_current_ms() - start_time);
+}
+
+// int main()
+// {
+// 	printf("%ld",get_current_ms());
+// 	return (0);
+// }
