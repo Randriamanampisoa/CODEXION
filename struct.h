@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 11:59:04 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/07 16:37:12 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/08 13:32:58 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ typedef struct s_data
 	int				dongle_cooldown;
 	char			*scheduler;
 	long			start_time;
-	int				stop;
 	pthread_mutex_t	print_mutex;
-	pthread_mutex_t	stop_mutex;
 }	t_data;
 
 typedef struct s_dongle
@@ -41,7 +39,7 @@ typedef struct s_dongle
 typedef struct s_coder
 {
 	int				id;
-	pthread_t		thread;
+	pthread_t		*thread;
 	t_dongle		*left;
 	t_dongle		*right;
 	t_data			*config;
@@ -49,12 +47,5 @@ typedef struct s_coder
 	long			last_compile_start;
 	pthread_mutex_t	activity_mutex;
 }	t_coder;
-
-typedef struct s_monitor_arg
-{
-	t_data		*config;
-	t_coder		*coders;
-	pthread_t	monitor_thread;
-}	t_monitor;
 
 #endif
