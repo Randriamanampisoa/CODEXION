@@ -6,7 +6,7 @@
 /*   By: fanilran <fanilran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/16 04:30:25 by fanilran          #+#    #+#             */
-/*   Updated: 2026/09/08 14:03:24 by fanilran         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:54:43 by fanilran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,29 @@ int	take_dongle(t_coder *coder)
 		take_one(coder, coder->left);
 	}
 	return (1);
+}
+
+int	check_burnout(t_coder *coders)
+{
+	int	i;
+	long	d;
+	long	n;
+
+	i = 0;
+	while (i < coders->config->number_of_coder)
+	{
+		pthread_mutex_lock(&coders[i].last_compile_start);
+		d = coders->last_compile_start + get_timestamp_ms(coders->config->start_time);
+		pthread_mutex_lock(&coders[i].last_compile_start);
+		n = get_current_ms();
+		if (n > d)
+		{
+			printf("%ld %d is bunrout", n, coders[i].id);
+			return (1);
+		}
+		i++;
+	}
+	
 }
 
 void	*routine(void *arg)
@@ -88,6 +111,7 @@ int	main(int argc, char *argv[])
 	if (!init_coder_dongle(&config, &coders, &dongles))
 		return (1);
 	config.start_time = get_current_ms();
+	//printf("Start time: %ld\n\n", get_current_ms());
 	create_threads(&config, coders);
 	i = 0;
 	while (i < config.number_of_coder)
