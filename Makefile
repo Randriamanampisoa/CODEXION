@@ -6,7 +6,9 @@ SRC =	main.c \
 		init.c \
 		dongles.c \
 		action.c \
-		time.c 
+		time.c \
+		simulation.c \
+		thread.c
 OBJ = $(SRC:.c=.o)
 NAME = ./codexion
 
